@@ -3,16 +3,18 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    #home-manager.url = "github:nix-community/home-manager/release-23.05";
-    #home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # home-manager.url = "github:nix-community/home-manager/release-23.05";
+    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin.url = "github:LnL7/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -22,6 +24,10 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
+
+      userConfigurations = {
+         fpalen = import ./home-manager/fpalen.nix;
+      };
     in rec {
 
       # Your custom packages
@@ -42,8 +48,7 @@
       # These are usually stuff you would upstream into nixpkgs
       nixosModules = import ./modules/nixos;
 
-      nixosConfigurations = {
-        dev = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.dev = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
             ./nixos/configuration.nix
@@ -51,10 +56,21 @@
               imports = [ home-manager.nixosModules.home-manager ];
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.fpalen = import ./home-manager/fpalen.nix;
+              home-manager.users = userConfigurations;
             }
           ];
         };
-      };
+        darwinConfigurations.darwin = nix-darwin.lib.darwinSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ 
+            ./darwin/configuration.nix
+            {
+              imports = [ home-manager.darwinModules.home-manager ];
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users = userConfigurations;
+            }
+          ];
+        };
     };
 }

@@ -7,7 +7,7 @@
       bookmarks = {};
       settings = {
         "browser.startup.homepage" = "https://start.duckduckgo.com";
-	"extensions.pocket.enabled" = false;
+	      "extensions.pocket.enabled" = false;
       };
     };
   };

@@ -5,12 +5,15 @@ in
 {
 
   imports = [
+    ./fonts
     ./cli
     # ./gui
   ];
 
 
   programs.home-manager.enable = true;
+
+  fonts.fontconfig.enable = true;
 
   programs.git = {
     enable = true;

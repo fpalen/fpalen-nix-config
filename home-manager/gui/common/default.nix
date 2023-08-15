@@ -1,6 +1,7 @@
 {
   imports = [
-    ./wezterm
-    ./firefox
+    # ./wezterm
+    # ./firefox
+    ./chrome
   ];
 }

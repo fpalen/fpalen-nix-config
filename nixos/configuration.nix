@@ -14,6 +14,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+      nixpkgs = {
+      config = {
+        allowUnfree = true;
+        allowBroken = true;
+      };
+    };
+
   nix = {
     settings = {
       # Enable flakes and new 'nix' command

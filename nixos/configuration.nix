@@ -73,6 +73,7 @@
   users.users.fpalen = {
     isNormalUser = true;
     hashedPassword = "$6$eZilnPK9eA9MP8Bt$09cIzBYkDxxT3mXhk9.G7MFcBjlUG.cCo8nXLYm0BlsUy5rpfNV71AbX5mydS8mby3yJL11dNqh9054cw9I2Q0";
+    shell = pkgs.fish;
     extraGroups = [ "wheel" "video" ];
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDhVHiKW87+HBOq6blsJ+yv0q7CfrmjGcu3nY9SZ9TLMUMIPoOAZ+GkSbm0tfp8BxRTCMasilYgr0edf8PhTUreH4Vemv/iKgrgZI0nc+9m3HBHxmqTnWL1LSC/ePx0sNr3XMaGAgl9PXNR2F2PorzjaTjhaf/LAYr+cWAVSlpDtYJRsDqnN0NcvyH3HuxwqHvuetdOOTULsBUx+Kk/V++LqZrVxYaXV2nHdBqR6SWNSWqnWO4vVgjJIspabRP8JQJUjsPXvMCIDdtHGggdBIYm8UZb58BaJehQX86FZQEo31JBhFy+ucx5kLi0fYlKkZLZidZl/rVMjN0TxC9HUC5gaW6ErA2+VfRWBzng50b4jer55vkDHHRL7EiBAwN/FoMZQeIuEkTgbaQfRt0o17Vut83WJtbTrfAAMwtpKbgDOrMzTranb+gCb3VgdEHnh31AO6z8USrXHlrSOwTBvfZL150PkKSQ/g+//JoL0e5sPYeNYZay/aPRUdy4GlrLHSE= fpalen"

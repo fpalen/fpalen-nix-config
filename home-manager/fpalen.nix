@@ -7,13 +7,18 @@ in
   imports = [
     ./fonts
     ./cli
-    # ./gui
+    ./gui
   ];
 
 
   programs.home-manager.enable = true;
 
-  fonts.fontconfig.enable = true;
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
+  home.packages = with pkgs;[ 
+    iterm2
+  ];
 
   programs.git = {
     enable = true;
@@ -41,6 +46,22 @@ in
   programs.neovim = {
     enable = true;
   };
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      ms-ceintl.vscode-language-pack-es
+      bbenoist.nix
+      # vscode-extensions.arcticicestudio.nord-visual-studio-code
+      # redhat.ansible
+      ms-azuretools.vscode-docker
+      # ms-vscode-remote.remote-containers
+      ms-vscode-remote.remote-ssh
+      # ms-vscode-remote.remote-ssh-edit
+      # ms-vscode.remote-explorer
+      # ms-vscode-remote.vscode-remote-extensionpack
+  ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [  ];
+};
 
   home.stateVersion = "23.05";
 }

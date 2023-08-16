@@ -2,6 +2,5 @@
   imports = [
     # ./wezterm
     # ./firefox
-    ./chrome
   ];
 }

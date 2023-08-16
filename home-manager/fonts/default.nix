@@ -3,10 +3,17 @@
     #
   ];
 
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
-    font-fira-code
-    font-fira-code-nerd-font
-    font-hack
-    font-hack-nerd-font
+    fira-code
+    fira-code-symbols
+    # fira-code-nerd-font
+    hack-font
+    # hack-nerd-font
+    (nerdfonts.override { fonts = [ 
+      "FiraCode"
+      "Hack"
+      ]; })
   ];
 }

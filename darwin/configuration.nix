@@ -1,18 +1,56 @@
 { config, pkgs, lib, ... }:
 
 {
-  users.users.fpalen.home = "/Users/fpalen" ;
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+        allowBroken = true;
+      };
+    };
+
+
+
+  
+  users.users.fpalen = {
+    shell = pkgs.fish;
+    home = "/Users/fpalen";
+  };
+
 
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    coreutils
     vim
     wget
     curl
     htop
     git
     mkpasswd
+    # zsh
+    # fish
+    # bash
+    openssh
+    openssl
+  ];
+
+  homebrew.enable = true;
+    homebrew.onActivation = {
+    autoUpdate = true;
+    cleanup = "zap";
+    upgrade = true;
+  };
+
+  homebrew.brews = [
+  ];
+    
+  homebrew.casks = [
+    "displaylink"
+    # "iterm2"
+    "Obsidian"
+    "parallels"
+    "google-chrome"
   ];
 
   # Use a custom configuration.nix location.
@@ -34,7 +72,8 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
-  # programs.fish.enable = true;
+  programs.fish.enable = true;
+  programs.bash.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-darwin";
 

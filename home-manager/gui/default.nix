@@ -6,7 +6,8 @@ let
 in {
   imports = [
     ./common
-    # ./hyprland
-    # ./sway
-  ];
+  ] ++ (lib.optionals isLinux [
+    ./hyprland
+    ./sway
+  ]);
 }

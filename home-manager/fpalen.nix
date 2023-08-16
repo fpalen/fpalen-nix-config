@@ -16,7 +16,11 @@ in
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
+  programs.fish.enable =  true;
+
   home.packages = with pkgs;[ 
+    zsh
+    fish
     iterm2
   ];
 

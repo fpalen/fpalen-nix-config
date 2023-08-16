@@ -28,9 +28,6 @@
     htop
     git
     mkpasswd
-    # zsh
-    # fish
-    # bash
     openssh
     openssl
   ];

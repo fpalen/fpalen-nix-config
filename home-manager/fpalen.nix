@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  #
+  
+  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = pkgs.stdenv.isLinux;
 in
 {
 
@@ -9,6 +11,7 @@ in
     ./cli
     ./gui
   ];
+
 
 
   programs.home-manager.enable = true;
@@ -21,8 +24,9 @@ in
   home.packages = with pkgs;[ 
     zsh
     fish
+  ] ++ ( lib.optionals isDarwin [
     iterm2
-  ];
+  ]);
 
   programs.git = {
     enable = true;

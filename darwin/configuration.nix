@@ -47,7 +47,7 @@
     
   homebrew.casks = [
     "displaylink"
-    # "iterm2"
+    "iterm2"
     "Obsidian"
     "parallels"
     "google-chrome"

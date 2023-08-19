@@ -33,10 +33,14 @@ in
     userName = "fpalen";
     userEmail = "fpalen@gmail.com"; 
     aliases = {
-      prettylog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+      prettylog =
+        "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(r) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
+      prettylog2 =
+        "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
       st = "status";
     };
     extraConfig = {
+      core.editor = "nvim";
       branch.autosetuprebase = "always";
       color.ui = true;
       core.askPass = ""; # needs to be empty to use terminal for ask pass
@@ -45,6 +49,7 @@ in
       push.default = "tracking";
       init.defaultBranch = "main";
     };
+    ignores = [ ".DS_Store" "*.pyc" ];
   };
 
   programs.tmux = {
